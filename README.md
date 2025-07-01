@@ -3,10 +3,6 @@
 **Harmed** هو قالب واجهة أمامية (Frontend Template) لمتجر إلكتروني متخصص في الملابس الطبية مثل الأطقم الطبية (Scrubs) والبالطوهات (Lab Coats). تم تصميم القالب ليكون جذابًا وعصريًا وسريع الاستجابة، مع التركيز على عرض المنتجات بشكل احترافي. تم بناؤه باستخدام HTML, CSS, و JavaScript فقط (Vanilla JS) بدون أي أطر عمل (Frameworks).
 
 **[➡️ زيارة العرض المباشر (Live Demo) للمشروع](https://seif4d.github.io/Harmed/)**  
-*(ملاحظة: استبدل الرابط برابط مشروعك الفعلي بعد رفعه)*
-
-![Harmed Screenshot](https://raw.githubusercontent.com/seif4d/Harmed/master/screenshot.png)
-*(ملاحظة: قم بأخذ لقطة شاشة (Screenshot) للمشروع وضعها في المجلد الرئيسي وحدث المسار هنا)*
 
 ## ✨ الميزات الرئيسية (Features)
 
