@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HarMed | Medical Luxury</title>
+    
+    <!-- الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+    --color-black: #000000;
+    --color-gold: #aa8c42; /* اللون الذهبي */
+}
+
+/* منع التمرير أثناء التحميل */
+body.loading {
+    overflow: hidden;
+}
+
+/* حاوية شاشة التحميل */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-black);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* حالة الإخفاء بعد التحميل */
+.preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* تصميم نبض القلب */
+.preloader .ecg-loader {
+    width: 200px;
+    height: 60px;
+}
+
+.preloader .ecg-loader path {
+    fill: none;
+    stroke: var(--color-gold);
+    stroke-width: 2;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: draw-ecg 4s ease-in-out infinite;
+}
+
+/* حركة رسم الخط */
+@keyframes draw-ecg {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+        /* --- المتغيرات والتأسيس --- */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #141414;
+            --gold-main: #D4AF37;
+            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F4E285 50%, #AA8C2C 100%);
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --glass: rgba(20, 20, 20, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --safe-area-bottom: env(safe-area-inset-bottom);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+            padding-bottom: 80px; /* مساحة للنافبار السفلي في الموبايل */
+        }
+
+        /* --- نصوص وعناوين --- */
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.3;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- الأزرار --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: none;
+        }
+
+        .btn-gold:active {
+            transform: scale(0.95);
+        }
+
+        /* --- Header (Desktop Only) --- */
+        .desktop-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .desktop-nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        .desktop-nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--gold-main);
+        }
+
+        /* --- Mobile Bottom Navigation --- */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--border-glass);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 calc(12px + var(--safe-area-bottom));
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            gap: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+        }
+
+        .nav-item.active {
+            color: var(--gold-main);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            background: url('https://placehold.co/1080x1920/111/333?text=Hero+Background') no-repeat center center/cover;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.3), rgba(5,5,5,1));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-logo-img {
+            width: 120px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* --- Abstract Glow Orbs --- */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .orb-1 { width: 300px; height: 300px; background: var(--gold-main); top: -100px; right: -100px; }
+        .orb-2 { width: 200px; height: 200px; background: #555; bottom: 10%; left: -50px; }
+
+        /* --- Horizontal Scrolling (Swipe) Sections --- */
+        .scrolling-wrapper {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-right: 5%; /* مساحة جمالية */
+        }
+
+        .scrolling-wrapper::-webkit-scrollbar {
+            display: none; /* إخفاء شريط التمرير */
+        }
+
+        /* --- Product Cards --- */
+        .product-card {
+            flex: 0 0 85%; /* الكارت يأخذ 85% من عرض شاشة الموبايل */
+            max-width: 350px;
+            scroll-snap-align: center;
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .product-image {
+            height: 400px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 60px 20px 20px;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--text-white);
+        }
+
+        .product-info p {
+            color: var(--gold-main);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--gold-main);
+            border: 1px solid var(--gold-main);
+        }
+
+        /* --- Features Grid (Compact for Mobile) --- */
+        .features-section {
+            padding: 60px 0;
+            background: #080808;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .feature-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-glass);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .feature-box i {
+            font-size: 2rem;
+            color: var(--gold-main);
+            margin-bottom: 10px;
+        }
+
+        .feature-box h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .feature-box p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* --- Vision / Video Section --- */
+        .vision-section {
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .vision-card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--gold-main);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-card::before {
+            content: '\f10e'; /* Quote Icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: rgba(255,255,255,0.03);
+        }
+
+        /* --- Accordion for Care & Size --- */
+        .tech-section {
+            padding: 50px 20px;
+        }
+
+        .accordion-item {
+            background: var(--bg-card);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-glass);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .accordion-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .accordion-content.open {
+            max-height: 500px; /* أو قيمة أكبر حسب المحتوى */
+            padding: 20px;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .size-table th, .size-table td {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+        }
+        .size-table th {
+            color: var(--gold-main);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px 100px; /* padding-bottom extra for mobile nav */
+            background: #000;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        .social-links a {
+            color: var(--text-white);
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+        .social-links a:hover { color: var(--gold-main); }
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 768px) {
+            .desktop-header { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-nav { display: none; }
+            body { padding-bottom: 0; }
+            .product-card { flex: 0 0 300px; }
+            .features-grid { grid-template-columns: repeat(4, 1fr); }
+            .hero-content { margin: 0 auto; }
+            .hero { padding-top: 80px; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+<!-- شاشة التحميل -->
+<div class="preloader">
+    <svg class="ecg-loader" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet">
+        <path d="M0 15 H15 L18 9 L23 21 L28 12 L32 15 H45 L48 9 L53 21 L58 12 L62 15 H75 L78 9 L83 21 L88 12 L92 15 H100"></path>
+    </svg>
+</div>
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <div class="logo">
+            <span class="gold-text" style="font-size: 1.5rem;">HarMed</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="#home">الرئيسية</a>
+            <a href="#products">المنتجات</a>
+            <a href="#features">المميزات</a>
+            <a href="#tech">دليل العناية</a>
+        </nav>
+        <a href="#products" class="btn btn-gold" style="padding: 8px 25px; font-size: 0.9rem;">تسوق الآن</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        
+        <div class="hero-content">
+            <!-- استبدل الرابط أدناه بشعارك (مفرغ خلفية) -->
+            <img src="https://placehold.co/150x80/000000/D4AF37?text=HarMed+Logo" alt="HarMed" class="hero-logo-img">
+            <h1>الأناقة في<br><span class="gold-text">ميدان العمل</span></h1>
+            <p>أزياء طبية صُممت للنخبة. تجمع بين راحة القطن ومتانة التصميم العصري.</p>
+            <a href="#products" class="btn btn-gold">اكتشف المجموعة</a>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision-section reveal">
+        <div class="vision-card">
+            <h3 style="color: var(--gold-main); margin-bottom: 15px;">رؤيتنا</h3>
+            <p style="line-height: 1.8; color: #ccc;">
+                في HarMed، نحن لا نصنع ملابس فحسب، بل نصنع الثقة. رؤيتنا هي تمكين كل ممارس صحي من الشعور بأفضل حالاته ليقدم أفضل ما لديه. الجودة ليست خياراً، بل هي المعيار.
+            </p>
+        </div>
+    </section>
+
+    <!-- Products Slider (Swipe) -->
+    <section id="products" style="padding-top: 40px;">
+        <div class="section-header reveal">
+            <h2>أحدث <span class="gold-text">الإصدارات</span></h2>
+            <p>اسحب لليسار لاستعراض الموديلات</p>
+        </div>
+
+        <div class="scrolling-wrapper reveal">
+            
+            <!-- Card 1: Round Scrub -->
+            <div class="product-card">
+                <div class="tag">عصري</div>
+                <div class="product-image">
+                    <!-- ضع صورة Round Scrub هنا -->
+                    <img src="1.jpg" alt="Round Scrub">
+                </div>
+                <div class="product-overlay">
+                    <div class="product-info">
+                        <h3>Round Scrub</h3>
+                        <p>تصميم شبابي، راحة مطلقة</p>
+<a href="product.html" class="btn btn-gold" style="width: 100%; padding: 10px; font-size: 0.9rem;">عرض التفاصيل</a>                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Classic Neck -->
+            <div class="product-card">
+                <div class="tag">الأكثر طلباً</div>
+                <div class="product-image">
+                    <!-- ضع صورة Classic Neck هنا -->
+                    <img src="2.jpg" alt="Classic V-Neck">
+                </div>
+                <div class="product-overlay">
+                    <div class="product-info">
+                        <h3>Classic V-Neck</h3>
+                        <p>الوقار الطبي بلمسة عصرية</p>
+                        <a href="product.html" class="btn btn-gold" style="width: 100%; padding: 10px; font-size: 0.9rem;">عرض التفاصيل</a>                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Zipper Coat -->
+            <div class="product-card">
+                <div class="tag">نسائي حصري</div>
+                <div class="product-image">
+                    <!-- ضع صورة Zipper Coat هنا -->
+                    <img src="https://placehold.co/400x600/1a1a1a/D4AF37?text=Zipper+Coat" alt="Zipper Coat">
+                </div>
+                <div class="product-overlay">
+                    <div class="product-info">
+                        <h3>Zipper Coat</h3>
+                        <p>أناقة البالطو وعملية السحاب</p>
+                        <button class="btn btn-gold" style="width: 100%; padding: 10px;">طلب الآن</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Half Neck -->
+            <div class="product-card">
+                <div class="tag">Slim Fit</div>
+                <div class="product-image">
+                    <!-- ضع صورة Half Neck هنا -->
+                    <img src="https://placehold.co/400x600/1a1a1a/D4AF37?text=Half+Neck" alt="Half Neck">
+                </div>
+                <div class="product-overlay">
+                    <div class="product-info">
+                        <h3>Half Neck Style</h3>
+                        <p>مظهر رياضي وجذاب</p>
+                        <button class="btn btn-gold" style="width: 100%; padding: 10px;">طلب الآن</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="features-section reveal">
+        <div class="section-header">
+            <h2>مواصفات <span class="gold-text">استثنائية</span></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-shield-virus"></i>
+                <h4>Antibacterial</h4>
+                <p>حماية ضد البكتيريا</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-tint-slash"></i>
+                <h4>Semi-Waterproof</h4>
+                <p>مقاوم للسوائل</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-feather"></i>
+                <h4>Soft Touch</h4>
+                <p>ملمس قطني ناعم</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-wind"></i>
+                <h4>Breathable</h4>
+                <p>مسامية عالية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specs (Accordion Style) -->
+    <section id="tech" class="tech-section reveal">
+        <h2 style="text-align: center; margin-bottom: 20px;">الدليل الفني</h2>
+        
+        <!-- Accordion 1: Care Protocol -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h3><i class="fas fa-hand-sparkles" style="color: var(--gold-main);"></i> بروتوكول العناية</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+                <ul style="list-style: none; padding: 10px 0;">
+                    <li style="margin-bottom: 10px;">• اقلب السكراب للداخل قبل الغسيل.</li>
+                    <li style="margin-bottom: 10px;">• استخدم ماء بارد أو فاتر.</li>
+                    <li style="margin-bottom: 10px;">• تجنب المبيضات القوية.</li>
+                    <li>• يفضل التجفيف بالهواء.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Accordion 2: Size Chart -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h3><i class="fas fa-ruler-combined" style="color: var(--gold-main);"></i> جدول المقاسات (سم)</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+                <table class="size-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Width</th>
+                            <th>Height</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S</td><td>29</td><td>92</td></tr>
+                        <tr><td>M</td><td>32</td><td>96</td></tr>
+                        <tr><td>L</td><td>35</td><td>100</td></tr>
+                        <tr><td>XL</td><td>38</td><td>104</td></tr>
+                        <tr><td>3XL</td><td>41</td><td>108</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2 class="gold-text">HarMed</h2>
+        <p style="font-size: 0.8rem; color: #777;">Be Unique... Be Elegant</p>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p style="font-size: 0.7rem; color: #555;">&copy; 2024 HarMed Medical Wear.</p>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="#home" class="nav-item active" onclick="setActiveNav(this)">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#products" class="nav-item" onclick="setActiveNav(this)">
+            <i class="fas fa-tshirt"></i>
+            <span>المنتجات</span>
+        </a>
+        <a href="#features" class="nav-item" onclick="setActiveNav(this)">
+            <i class="fas fa-star"></i>
+            <span>المميزات</span>
+        </a>
+        <a href="#tech" class="nav-item" onclick="setActiveNav(this)">
+            <i class="fas fa-info-circle"></i>
+            <span>دليلنا</span>
+        </a>
+    </nav>
+
+    <script>
+            window.addEventListener('load', () => {
+        // تأخير بسيط لإعطاء فرصة للعين لرؤية الانيميشن (1.5 ثانية)
+        setTimeout(() => {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('loaded');
+            document.body.classList.remove('loading');
+        }, 1500); 
+    });
+
+        // تفعيل نافبار الموبايل
+        function setActiveNav(element) {
+            document.querySelectorAll('.mobile-nav .nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // الأكورديون (فتح وإغلاق)
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.fa-chevron-down');
+            
+            // إغلاق أي أكورديون مفتوح آخر (اختياري)
+            document.querySelectorAll('.accordion-content').forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('open');
+                    c.style.maxHeight = null;
+                }
+            });
+
+            content.classList.toggle('open');
+            if (content.classList.contains('open')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                if(icon) icon.style.transform = "rotate(180deg)";
+            } else {
+                content.style.maxHeight = null;
+                if(icon) icon.style.transform = "rotate(0deg)";
+            }
+        }
+
+        // تأثير الظهور عند التمرير (Scroll Reveal)
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // تشغيل الدالة مرة واحدة عند التحميل
+        reveal();
+    </script>
+</body>
+</html>
