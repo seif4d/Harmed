@@ -1,5 +1,5 @@
 <div align="center">
-  <img "https://raw.githubusercontent.com/seif4d/Harmed/refs/heads/main/images/logo/icon.png" alt="HarMed Logo" width="120" />
+  <img src="images/logo/icon.png" alt="HarMed Logo" width="120" />
   <br />
   <h1>🩺 HarMed | Medical Luxury</h1>
   <p><strong>الأناقة في ميدان العمل | Where Elegance Meets Function</strong></p>
