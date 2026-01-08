@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/images/logo/logo-gold.png" alt="HarMed Logo" width="120" />
+  <img "images/logo/icon.png" alt="HarMed Logo" width="120" />
   <br />
   <h1>🩺 HarMed | Medical Luxury</h1>
   <p><strong>الأناقة في ميدان العمل | Where Elegance Meets Function</strong></p>
@@ -59,7 +59,7 @@ Harmed/
 2. افتح ملف `index.html` في المتصفح مباشرة.
 
 ## 📸 لقطات شاشة (Screenshots)
-*(يمكنك إضافة صور من الموقع هنا لاحقاً)*
+
 
 ## 👤 التواصل
 
