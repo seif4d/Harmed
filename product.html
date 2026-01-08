@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HarMed | Classic V-Neck Scrub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- نفس تنسيقات التصميم السابق --- */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #121212;
+            --gold-main: #D4AF37;
+            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #AA8C2C 100%);
+            /* لون واتساب الأخضر لتمييز زر الشراء */
+            --whatsapp-green: #25D366; 
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --safe-area-bottom: env(safe-area-inset-bottom);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            padding-bottom: 100px;
+        }
+
+        /* --- Header --- */
+        .product-header {
+            position: fixed;
+            top: 0; width: 100%; padding: 15px 20px; display: flex;
+            justify-content: space-between; align-items: center; z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+        .icon-btn {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: white;
+            text-decoration: none; font-size: 1.2rem; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        /* --- Gallery --- */
+        .image-gallery { position: relative; width: 100%; height: 55vh; background: #222; overflow: hidden; }
+        .slider-wrapper { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .slider-wrapper::-webkit-scrollbar { display: none; }
+        .slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: center; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+        .dots-container { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%; transition: 0.3s; }
+        .dot.active { background: var(--gold-main); width: 20px; border-radius: 10px; }
+
+        /* --- Sheet --- */
+        .product-details-sheet {
+            margin-top: -30px; background: var(--bg-dark); border-radius: 30px 30px 0 0;
+            padding: 30px 20px; position: relative; z-index: 20;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5); border-top: 1px solid var(--border-light);
+        }
+        .drag-indicator { width: 50px; height: 4px; background: #333; border-radius: 10px; margin: 0 auto 20px; }
+        .title-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .product-title { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+        .product-price { color: var(--gold-main); font-size: 1.4rem; font-weight: 700; }
+        .badge { display: inline-block; background: rgba(212, 175, 55, 0.15); color: var(--gold-main); padding: 4px 10px; border-radius: 5px; font-size: 0.8rem; margin-bottom: 15px; }
+        .rating { color: #FFD700; font-size: 0.9rem; margin-bottom: 20px; display: flex; align-items: center; gap: 5px; }
+        .rating span { color: var(--text-gray); font-size: 0.8rem; }
+
+        /* --- Selectors --- */
+        .selector-section { margin-bottom: 25px; }
+        .selector-title { font-size: 1rem; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .size-guide-btn { color: var(--gold-main); font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+        .colors-container { display: flex; gap: 15px; }
+        .color-option { width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; position: relative; }
+        .color-option.active { border-color: var(--gold-main); transform: scale(1.1); }
+        .c-navy { background: #001f3f; } .c-gray { background: #555; } .c-black { background: #000; border: 1px solid #333; } .c-burgundy { background: #800020; }
+        .sizes-container { display: flex; gap: 10px; flex-wrap: wrap; }
+        .size-option { width: 50px; height: 40px; border: 1px solid var(--border-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; font-weight: 600; color: var(--text-gray); }
+        .size-option.active { background: var(--gold-main); color: #000; border-color: var(--gold-main); box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+
+        .description p { line-height: 1.6; color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; }
+        .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-light); }
+        .spec-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #ccc; }
+        .spec-item i { color: var(--gold-main); }
+
+        /* --- Sticky Footer (Modified for WhatsApp) --- */
+        .sticky-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px);
+            padding: 15px 20px calc(15px + var(--safe-area-bottom));
+            display: flex; align-items: center; gap: 20px;
+            border-top: 1px solid var(--border-light); z-index: 90;
+        }
+
+        .quantity-control { display: flex; align-items: center; background: #222; border-radius: 25px; padding: 5px; border: 1px solid #333; }
+        .qty-btn { width: 35px; height: 35px; border: none; background: transparent; color: white; font-size: 1.2rem; cursor: pointer; }
+        .qty-display { width: 30px; text-align: center; font-weight: 600; }
+
+        .buy-whatsapp-btn {
+            flex: 1;
+            /* استخدام لون واتساب أو الذهبي حسب الرغبة - سأستخدم الذهبي للحفاظ على الهوية مع أيقونة واتساب */
+            background: var(--gold-gradient); 
+            border: none; height: 50px; border-radius: 25px;
+            font-weight: 700; font-size: 1rem; color: #000;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); cursor: pointer; transition: 0.2s;
+        }
+        .buy-whatsapp-btn:active { transform: scale(0.97); }
+        .buy-whatsapp-btn i { font-size: 1.2rem; }
+
+        /* --- Modal --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: #1a1a1a; padding: 20px; border-radius: 15px; width: 100%; max-width: 400px; position: relative; border: 1px solid var(--gold-main); }
+        .close-modal { position: absolute; top: 10px; left: 15px; font-size: 1.5rem; color: #fff; cursor: pointer; }
+        .size-img { width: 100%; border-radius: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <header class="product-header">
+        <a href="#" class="icon-btn" onclick="history.back()"><i class="fas fa-arrow-right"></i></a>
+        <span style="font-weight: 700; font-size: 1.1rem;">HarMed Store</span>
+        <a href="#" class="icon-btn"><i class="fas fa-home"></i></a>
+    </header>
+
+    <section class="image-gallery">
+        <div class="slider-wrapper" id="slider">
+            <div class="slide"><img src="1.jpg" alt="Front"></div>
+            <div class="slide"><img src="2.jpg" alt="Side"></div>
+            <div class="slide"><img src="3.jpg" alt="Detail"></div>
+        </div>
+        <div class="dots-container" id="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </section>
+
+    <section class="product-details-sheet">
+        <div class="drag-indicator"></div>
+
+        <div class="title-row">
+            <div>
+                <span class="badge">الأكثر مبيعاً</span>
+                <h1 class="product-title" id="product-name">Classic V-Neck Scrub</h1>
+            </div>
+            <div class="product-price">850 ج.م</div>
+        </div>
+
+        <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>(4.8)</span>
+        </div>
+
+        <div class="selector-section">
+            <div class="selector-title">اللون المختار: <span id="color-name" style="color:var(--gold-main)">Navy Blue</span></div>
+            <div class="colors-container">
+                <div class="color-option c-navy active" onclick="selectColor(this, 'Navy Blue')"></div>
+                <div class="color-option c-burgundy" onclick="selectColor(this, 'Burgundy')"></div>
+                <div class="color-option c-gray" onclick="selectColor(this, 'Dark Gray')"></div>
+                <div class="color-option c-black" onclick="selectColor(this, 'Black')"></div>
+            </div>
+        </div>
+
+        <div class="selector-section">
+            <div class="selector-title">
+                <span>المقاس</span>
+                <span class="size-guide-btn" onclick="openModal()">جدول المقاسات</span>
+            </div>
+            <div class="sizes-container">
+                <div class="size-option" onclick="selectSize(this)">S</div>
+                <div class="size-option active" onclick="selectSize(this)">M</div>
+                <div class="size-option" onclick="selectSize(this)">L</div>
+                <div class="size-option" onclick="selectSize(this)">XL</div>
+                <div class="size-option" onclick="selectSize(this)">XXL</div>
+            </div>
+        </div>
+
+        <div class="description">
+            <h3>الوصف</h3>
+            <p>تم تصميم سكراب HarMed الكلاسيكي ليمنحك مظهراً احترافياً وراحة لا تضاهى. مصنوع من خامات Cotton Lycra المعالجة.</p>
+        </div>
+
+        <!-- Specs Grid -->
+        <div class="specs-grid">
+            <div class="spec-item"><i class="fas fa-shield-virus"></i> مضاد للبكتيريا</div>
+            <div class="spec-item"><i class="fas fa-feather-alt"></i> ملمس ناعم جداً</div>
+            <div class="spec-item"><i class="fas fa-tint-slash"></i> شبه مقاوم للماء</div>
+            <div class="spec-item"><i class="fas fa-wind"></i> قماش مسامي</div>
+        </div>
+        
+        <div style="height: 50px;"></div>
+    </section>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-footer">
+        <div class="quantity-control">
+            <button class="qty-btn" onclick="updateQty(-1)">-</button>
+            <span class="qty-display" id="qty">1</span>
+            <button class="qty-btn" onclick="updateQty(1)">+</button>
+        </div>
+        <!-- زر الشراء عبر واتساب -->
+        <button class="buy-whatsapp-btn" onclick="buyViaWhatsapp()">
+            شراء الآن <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+        </button>
+    </div>
+
+    <!-- Size Chart Modal -->
+    <div class="modal" id="sizeModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 style="color: var(--gold-main); text-align: center; margin-bottom: 15px;">جدول المقاسات</h3>
+            <img src="https://placehold.co/500x500/000/D4AF37?text=Size+Chart+Image" alt="Size Chart" class="size-img">
+        </div>
+    </div>
+
+    <script>
+        // --- تهيئة المتغيرات ---
+        // !!! هام جداً: قم بتغيير الرقم هنا لرقم الواتساب الخاص بالمتجر (مع كود الدولة) !!!
+        const phoneNumber = "201000000000"; 
+
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        let quantity = 1;
+
+        // --- Slider Logic ---
+        slider.addEventListener('scroll', () => {
+            const slideWidth = slider.clientWidth;
+            let index = Math.round(Math.abs(slider.scrollLeft) / slideWidth); 
+            dots.forEach(dot => dot.classList.remove('active'));
+            if(dots[index]) dots[index].classList.add('active');
+        });
+
+        // --- التحديد (اللون والمقاس) ---
+        function selectColor(element, colorName) {
+            document.querySelectorAll('.color-option').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('color-name').innerText = colorName;
+        }
+
+        function selectSize(element) {
+            document.querySelectorAll('.size-option').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // --- الكمية ---
+        function updateQty(change) {
+            quantity += change;
+            if (quantity < 1) quantity = 1;
+            document.getElementById('qty').innerText = quantity;
+        }
+
+        // --- المودال ---
+        function openModal() { document.getElementById('sizeModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('sizeModal').style.display = 'none'; }
+        window.onclick = function(event) { if (event.target == document.getElementById('sizeModal')) closeModal(); }
+
+        // --- دالة الشراء عبر واتساب (الجديدة) ---
+        function buyViaWhatsapp() {
+            // 1. جمع البيانات من الصفحة
+            const productName = document.getElementById('product-name').innerText;
+            const selectedColor = document.getElementById('color-name').innerText;
+            
+            // التأكد من اختيار مقاس
+            const sizeElement = document.querySelector('.size-option.active');
+            const selectedSize = sizeElement ? sizeElement.innerText : 'غير محدد';
+
+            const qty = document.getElementById('qty').innerText;
+
+            // 2. تجهيز نص الرسالة (استخدمنا * لعمل Bold في واتساب)
+            // %0a تعني سطر جديد في الروابط
+            let message = `مرحباً HarMed، أود طلب المنتج التالي:%0a%0a`;
+            message += `*المنتج:* ${productName}%0a`;
+            message += `*اللون:* ${selectedColor}%0a`;
+            message += `*المقاس:* ${selectedSize}%0a`;
+            message += `*الكمية:* ${qty}%0a%0a`;
+            message += `يرجى تأكيد الطلب وتفاصيل الشحن.`;
+
+            // 3. فتح رابط واتساب
+            const url = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // فتح في نافذة جديدة
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
