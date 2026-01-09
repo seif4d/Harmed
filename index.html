@@ -1,29 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HarMed | Medical Luxury</title>
+    <meta name="description" content="HarMed - العلامة الرائدة في الأزياء الطبية الفاخرة. سكرابات، بالطوهات، وتصاميم عصرية للأطباء والممارسين الصحيين.">
     
     <!-- الخطوط -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- الأيقونات -->
+    <!-- الأيقونات والستايل -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="shortcut icon" href="images/logo/icon.png" type="image/x-icon">
-
 </head>
-<body>
-<!-- شاشة التحميل -->
-<div class="preloader">
-    <svg class="ecg-loader" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet">
-        <path d="M0 15 H15 L18 9 L23 21 L28 12 L32 15 H45 L48 9 L53 21 L58 12 L62 15 H75 L78 9 L83 21 L88 12 L92 15 H100"></path>
-    </svg>
-</div>
+<body class="loading">
+
+    <!-- شاشة التحميل -->
+    <div class="preloader">
+        <svg class="ecg-loader" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet">
+            <path d="M0 15 H15 L18 9 L23 21 L28 12 L32 15 H45 L48 9 L53 21 L58 12 L62 15 H75 L78 9 L83 21 L88 12 L92 15 H100"></path>
+        </svg>
+    </div>
+
     <!-- Desktop Header -->
     <header class="desktop-header">
         <div class="logo">
@@ -44,8 +45,7 @@
         <div class="orb orb-2"></div>
         
         <div class="hero-content">
-            <!-- استبدل الرابط أدناه بشعارك (مفرغ خلفية) -->
-            <img src="images/logo/icon.png" alt="HarMed" class="hero-logo-img">
+            <img src="images/logo/icon.png" alt="HarMed Logo" class="hero-logo-img">
             <h1>الأناقة في<br><span class="gold-text">ميدان العمل</span></h1>
             <p>أزياء طبية صُممت للنخبة. تجمع بين راحة القطن ومتانة التصميم العصري.</p>
             <a href="#products" class="btn btn-gold">اكتشف المجموعة</a>
@@ -71,21 +71,7 @@
 
         <div class="scrolling-wrapper reveal">
             
-            <!-- Card 1: Round Scrub -->
-            <div class="product-card">
-                <div class="tag">عصري</div>
-                <div class="product-image">
-                    <!-- ضع صورة Round Scrub هنا -->
-                    <img src="images/products/round/2.jpg" alt="Round Scrub">
-                </div>
-                <div class="product-overlay">
-                    <div class="product-info">
-                        <h3>Round Scrub</h3>
-                        <p>تصميم شبابي، راحة مطلقة</p>
-                        <a href="product.html?id=round" class="btn btn-gold" style="width: 100%; padding: 10px; font-size: 0.9rem;">عرض التفاصيل</a>                    </div>
-                </div>
-            </div>
-<!-- 1. Classic V-Neck -->
+            <!-- 1. Classic V-Neck (يظهر أولاً - بدون lazy) -->
             <div class="product-card">
                 <div class="tag">الأكثر مبيعاً</div>
                 <div class="product-image">
@@ -100,11 +86,11 @@
                 </div>
             </div>
 
-            <!-- 2. Half Neck Style -->
+            <!-- 2. Half Neck Style (يظهر ثانياً - بدون lazy) -->
             <div class="product-card">
                 <div class="tag">Slim Fit</div>
                 <div class="product-image">
-                    <img src="images/products/halfneck/1.JPG" alt="Half Neck">
+                    <img src="images/products/HalfNeck/1.jpg" alt="Half Neck">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -115,11 +101,13 @@
                 </div>
             </div>
 
+            <!-- من هنا نبدأ Lazy Loading لتسريع الموقع -->
+
             <!-- 3. Half Neck Pro -->
             <div class="product-card">
                 <div class="tag">تصميم فريد</div>
                 <div class="product-image">
-                    <img src="images/products/halfneck2/1.jpg" alt="Half Neck Pro">
+                    <img src="images/products/HalfNeck2/1.JPG" alt="Half Neck Pro" loading="lazy">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -134,7 +122,7 @@
             <div class="product-card">
                 <div class="tag">للمحجبات</div>
                 <div class="product-image">
-                    <img src="images/products/hijab/1.JPG" alt="Hijab Scrub">
+                    <img src="images/products/hijab/1.JPG" alt="Hijab Scrub" loading="lazy">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -145,11 +133,11 @@
                 </div>
             </div>
 
-            <!-- 5. Labcoat Scrub -->
+            <!-- 5. Labcoat (Zipper) -->
             <div class="product-card">
                 <div class="tag">عصري</div>
                 <div class="product-image">
-                    <img src="images/products/Labcoat/1.jpg" alt="Zipper Scrub">
+                    <img src="images/products/Labcoat/1.jpg" alt="Labcoat Scrub" loading="lazy">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -164,7 +152,7 @@
             <div class="product-card">
                 <div class="tag">لمسة خاصة</div>
                 <div class="product-image">
-                    <img src="images/products/polo/1.jpg" alt="Polo Scrub">
+                    <img src="images/products/polo/1.jpg" alt="Polo Scrub" loading="lazy">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -179,7 +167,7 @@
             <div class="product-card">
                 <div class="tag">نسائي</div>
                 <div class="product-image">
-                    <img src="images/products/female/1.jpg" alt="Female Scrub">
+                    <img src="images/products/female/1.jpg" alt="Female Scrub" loading="lazy">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -194,7 +182,7 @@
             <div class="product-card">
                 <div class="tag">شبابي</div>
                 <div class="product-image">
-                    <img src="images/products/round/1.jpg" alt="Round Scrub">
+                    <img src="images/products/round/1.jpg" alt="Round Scrub" loading="lazy">
                 </div>
                 <div class="product-overlay">
                     <div class="product-info">
@@ -237,11 +225,11 @@
         </div>
     </section>
 
-    <!-- Technical Specs (Accordion Style) -->
+    <!-- Technical Specs -->
     <section id="tech" class="tech-section reveal">
         <h2 style="text-align: center; margin-bottom: 20px;">الدليل الفني</h2>
         
-        <!-- Accordion 1: Care Protocol -->
+        <!-- Care Protocol -->
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h3><i class="fas fa-hand-sparkles" style="color: var(--gold-main);"></i> بروتوكول العناية</h3>
@@ -257,7 +245,7 @@
             </div>
         </div>
 
-        <!-- Accordion 2: Size Chart -->
+        <!-- Size Chart -->
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h3><i class="fas fa-ruler-combined" style="color: var(--gold-main);"></i> جدول المقاسات (سم)</h3>
@@ -320,5 +308,4 @@
     <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>
