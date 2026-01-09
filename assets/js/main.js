@@ -53,3 +53,34 @@
         }
         // تشغيل الدالة مرة واحدة عند التحميل
         reveal();
+// --- تفعيل النافبار تلقائياً عند التمرير (Auto Active on Scroll) ---
+
+// 1. تحديد جميع الأقسام وروابط النافبار
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.mobile-nav .nav-item');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        // الرقم 150 هو "هامش" لكي يتم تفعيل الزر قبل وصول القسم لأعلى الشاشة بقليل
+        // هذا يعطي شعوراً أسرع وأفضل للمستخدم
+        if (window.scrollY >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        // إزالة التفعيل من الكل
+        link.classList.remove('active');
+        
+        // إضافة التفعيل للزر المطابق للقسم الحالي
+        // نتأكد أن current له قيمة عشان ما يحصلش خطأ لو احنا في الفوتر مثلاً
+        if (current && link.getAttribute('href').includes(current)) {
+            link.classList.add('active');
+        }
+    });
+});

@@ -8,28 +8,26 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/product.css">
+    <link rel="shortcut icon" href="images/logo/icon.png" type="image/x-icon">
 </head>
 <body>
 
     <header class="product-header">
         <a href="#" class="icon-btn" onclick="history.back()"><i class="fas fa-arrow-right"></i></a>
         <span style="font-weight: 700; font-size: 1.1rem;">HarMed Store</span>
-        <a href="#" class="icon-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="icon-btn"><i class="fas fa-home"></i></a>
     </header>
 
     <section class="image-gallery">
+        <!-- الحاويات فارغة، وسيقوم JS بملئها -->
         <div class="slider-wrapper" id="slider">
-            <div class="slide"><img src="images/ui/bg.jpg" alt="Front"></div>
-            <div class="slide"><img src="images/ui/bg.jpg" alt="Side"></div>
-            <div class="slide"><img src="images/ui/bg.jpg" alt="Detail"></div>
+            <!-- سيتم إضافة الصور هنا تلقائياً -->
         </div>
+        
         <div class="dots-container" id="dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+            <!-- سيتم إضافة النقاط هنا تلقائياً -->
         </div>
     </section>
 
@@ -53,15 +51,12 @@
             <span>(4.8)</span>
         </div>
 
-        <div class="selector-section">
-            <div class="selector-title">اللون المختار: <span id="color-name" style="color:var(--gold-main)">Navy Blue</span></div>
-            <div class="colors-container">
-                <div class="color-option c-navy active" onclick="selectColor(this, 'Navy Blue')"></div>
-                <div class="color-option c-burgundy" onclick="selectColor(this, 'Burgundy')"></div>
-                <div class="color-option c-gray" onclick="selectColor(this, 'Dark Gray')"></div>
-                <div class="color-option c-black" onclick="selectColor(this, 'Black')"></div>
-            </div>
-        </div>
+<!-- في product.html -->
+<div class="selector-section">
+    <div class="selector-title">اللون المختار: <span id="color-name" style="color:var(--gold-main)">-</span></div>
+    <!-- اترك الحاوية فارغة، الجافاسكريبت سيملؤها -->
+    <div class="colors-container"></div>
+</div>
 
         <div class="selector-section">
             <div class="selector-title">
