@@ -263,7 +263,7 @@ function buyViaWhatsapp() {
     message += `*اللون:* ${selectedColor}%0a`;
     message += `*المقاس:* ${selectedSize}%0a`;
     message += `*الكمية:* ${qty}%0a`;
-    message += `*السعر المتوقع:* ${priceTotal} ج.م%0a%0a`;
+    message += `*السعر:* ${priceTotal} ج.م%0a%0a`;
     message += `يرجى التواصل لتأكيد العنوان والشحن.`;
 
     const url = `https://wa.me/${phoneNumber}?text=${message}`;
