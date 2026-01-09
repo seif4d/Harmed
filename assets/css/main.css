@@ -1,14 +1,43 @@
+/* --- 1. المتغيرات وإعدادات الألوان --- */
 :root {
+    --bg-dark: #050505;
+    --bg-card: #141414;
+    --gold-main: #D4AF37;
+    --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F4E285 50%, #AA8C2C 100%);
+    --text-white: #ffffff;
+    --text-gray: #b0b0b0;
+    --glass: rgba(20, 20, 20, 0.7);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --safe-area-bottom: env(safe-area-inset-bottom);
     --color-black: #000000;
-    --color-gold: #aa8c42; /* اللون الذهبي */
 }
 
-/* منع التمرير أثناء التحميل */
+/* --- 2. الإعدادات العامة (Reset) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* إزالة لون النقر الأزرق في الموبايل */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    overflow-x: hidden;
+    padding-bottom: 80px; /* مساحة للنافبار السفلي في الموبايل */
+}
+
+/* منع التمرير أثناء ظهور شاشة التحميل */
 body.loading {
     overflow: hidden;
 }
 
-/* حاوية شاشة التحميل */
+/* --- 3. شاشة التحميل (Preloader) --- */
 .preloader {
     position: fixed;
     top: 0;
@@ -23,13 +52,11 @@ body.loading {
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-/* حالة الإخفاء بعد التحميل */
 .preloader.loaded {
     opacity: 0;
     visibility: hidden;
 }
 
-/* تصميم نبض القلب */
 .preloader .ecg-loader {
     width: 200px;
     height: 60px;
@@ -37,479 +64,462 @@ body.loading {
 
 .preloader .ecg-loader path {
     fill: none;
-    stroke: var(--color-gold);
+    stroke: var(--gold-main);
     stroke-width: 2;
     stroke-dasharray: 400;
     stroke-dashoffset: 400;
-    animation: draw-ecg 4s ease-in-out infinite;
+    animation: draw-ecg 2.5s ease-in-out infinite;
 }
 
-/* حركة رسم الخط */
 @keyframes draw-ecg {
-    to {
-        stroke-dashoffset: 0;
-    }
+    0% { stroke-dashoffset: 400; }
+    100% { stroke-dashoffset: 0; }
 }
-        /* --- المتغيرات والتأسيس --- */
-        :root {
-            --bg-dark: #050505;
-            --bg-card: #141414;
-            --gold-main: #D4AF37;
-            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F4E285 50%, #AA8C2C 100%);
-            --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --glass: rgba(20, 20, 20, 0.7);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --safe-area-bottom: env(safe-area-inset-bottom);
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+/* --- 4. النصوص والعناوين --- */
+.gold-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+h1, h2, h3 {
+    line-height: 1.3;
+}
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            overflow-x: hidden;
-            padding-bottom: 80px; /* مساحة للنافبار السفلي في الموبايل */
-        }
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
 
-        /* --- نصوص وعناوين --- */
-        .gold-text {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
+.section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
 
-        h1, h2, h3 {
-            line-height: 1.3;
-        }
+.section-header p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 0 20px;
-        }
+/* --- 5. الأزرار (Buttons) --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem;
+}
 
-        .section-header h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+.btn-gold {
+    background: var(--gold-gradient);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    border: none;
+}
 
-        .section-header p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+.btn-gold:active {
+    transform: scale(0.95);
+}
 
-        /* --- الأزرار --- */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 35px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+.btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
 
-        .btn-gold {
-            background: var(--gold-gradient);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            border: none;
-        }
+/* --- 6. الهيدر (Desktop Header) --- */
+.desktop-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(5, 5, 5, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-glass);
+}
 
-        .btn-gold:active {
-            transform: scale(0.95);
-        }
+.logo {
+    display: flex;
+    align-items: center;
+}
 
-        /* --- Header (Desktop Only) --- */
-        .desktop-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-glass);
-        }
+.desktop-nav {
+    display: flex;
+    gap: 25px;
+}
 
-        .logo img {
-            height: 40px;
-        }
+.desktop-nav a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
 
-        .desktop-nav {
-            display: flex;
-            gap: 25px;
-        }
+.desktop-nav a:hover {
+    color: var(--gold-main);
+}
 
-        .desktop-nav a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
+/* --- 7. قسم Hero --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    /* تأكد أن الصورة موجودة في images/ui/bg.jpg */
+    background: url('../../images/ui/bg.jpg') no-repeat center center/cover;
+}
 
-        .desktop-nav a:hover {
-            color: var(--gold-main);
-        }
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(5,5,5,0.4), rgba(5,5,5,1));
+}
 
-        /* --- Mobile Bottom Navigation --- */
-        .mobile-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid var(--border-glass);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0 calc(12px + var(--safe-area-bottom));
-            z-index: 1000;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-        }
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    animation: fadeInUp 1s ease-out;
+}
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #666;
-            text-decoration: none;
-            font-size: 0.75rem;
-            gap: 5px;
-            transition: 0.3s;
-        }
+.hero-logo-img {
+    width: 120px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
+}
 
-        .nav-item i {
-            font-size: 1.4rem;
-        }
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
 
-        .nav-item.active {
-            color: var(--gold-main);
-        }
+.hero p {
+    font-size: 1.1rem;
+    color: #ddd;
+    margin-bottom: 30px;
+}
 
-        .nav-item.active i {
-            transform: translateY(-2px);
-            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
-        }
+/* كرات الضوء الخلفية */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.4;
+}
+.orb-1 { width: 300px; height: 300px; background: var(--gold-main); top: -100px; right: -100px; }
+.orb-2 { width: 200px; height: 200px; background: #333; bottom: 10%; left: -50px; }
 
-        /* --- Hero Section --- */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            overflow: hidden;
-            background: url('../../images/ui/bg.jpg') no-repeat center center/cover;
-        }
+/* --- 8. سلايدر المنتجات (Swipe) --- */
+.scrolling-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 5%;
+}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.3), rgba(5,5,5,1));
-        }
+.scrolling-wrapper::-webkit-scrollbar {
+    display: none;
+}
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
-            animation: fadeInUp 1s ease-out;
-        }
+.product-card {
+    flex: 0 0 85%; /* للموبايل */
+    max-width: 350px;
+    scroll-snap-align: center;
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    position: relative;
+    transition: transform 0.3s;
+}
 
-        .hero-logo-img {
-            width: 120px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
-        }
+.product-image {
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: #1a1a1a; /* لون خلفية احتياطي */
+}
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            line-height: 1.1;
-        }
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
 
-        .hero p {
-            font-size: 1.1rem;
-            color: #ddd;
-            margin-bottom: 30px;
-        }
+/* تأثير التكبير عند الوقوف بالماوس (للديسك توب) */
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
 
-        /* --- Abstract Glow Orbs --- */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            opacity: 0.4;
-        }
-        .orb-1 { width: 300px; height: 300px; background: var(--gold-main); top: -100px; right: -100px; }
-        .orb-2 { width: 200px; height: 200px; background: #555; bottom: 10%; left: -50px; }
+.product-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    padding: 60px 20px 20px;
+}
 
-        /* --- Horizontal Scrolling (Swipe) Sections --- */
-        .scrolling-wrapper {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding-right: 5%; /* مساحة جمالية */
-        }
+.product-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: var(--text-white);
+}
 
-        .scrolling-wrapper::-webkit-scrollbar {
-            display: none; /* إخفاء شريط التمرير */
-        }
+.product-info p {
+    color: var(--gold-main);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
 
-        /* --- Product Cards --- */
-        .product-card {
-            flex: 0 0 85%; /* الكارت يأخذ 85% من عرض شاشة الموبايل */
-            max-width: 350px;
-            scroll-snap-align: center;
-            background: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-            position: relative;
-            transition: transform 0.3s;
-        }
+.tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: var(--gold-main);
+    border: 1px solid var(--gold-main);
+    z-index: 10;
+}
 
-        .product-image {
-            height: 400px;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
+/* --- 9. المميزات (Features) --- */
+.features-section {
+    padding: 60px 0;
+    background: #080808;
+}
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 0 20px;
+}
 
-        .product-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 60px 20px 20px;
-        }
+.feature-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-glass);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
 
-        .product-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            color: var(--text-white);
-        }
+.feature-box i {
+    font-size: 2rem;
+    color: var(--gold-main);
+    margin-bottom: 10px;
+}
 
-        .product-info p {
-            color: var(--gold-main);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
+.feature-box h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
 
-        .tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: var(--gold-main);
-            border: 1px solid var(--gold-main);
-        }
+.feature-box p {
+    font-size: 0.8rem;
+    color: #888;
+}
 
-        /* --- Features Grid (Compact for Mobile) --- */
-        .features-section {
-            padding: 60px 0;
-            background: #080808;
-        }
+/* --- 10. الرؤية (Vision) --- */
+.vision-section {
+    padding: 40px 20px;
+    position: relative;
+}
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 0 20px;
-        }
+.vision-card {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid var(--gold-main);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
-        .feature-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-glass);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
+.vision-card::before {
+    content: '\f10e'; /* FontAwesome Quote Icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.03);
+}
 
-        .feature-box i {
-            font-size: 2rem;
-            color: var(--gold-main);
-            margin-bottom: 10px;
-        }
+/* --- 11. الأكورديون (الدليل الفني) --- */
+.tech-section {
+    padding: 50px 20px;
+}
 
-        .feature-box h4 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
+.accordion-item {
+    background: var(--bg-card);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-glass);
+    overflow: hidden;
+}
 
-        .feature-box p {
-            font-size: 0.8rem;
-            color: #888;
-        }
+.accordion-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(255,255,255,0.02);
+}
 
-        /* --- Vision / Video Section --- */
-        .vision-section {
-            padding: 40px 20px;
-            position: relative;
-        }
-        
-        .vision-card {
-            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid var(--gold-main);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+.accordion-header h3 {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .vision-card::before {
-            content: '\f10e'; /* Quote Icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 8rem;
-            color: rgba(255,255,255,0.03);
-        }
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 20px;
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
 
-        /* --- Accordion for Care & Size --- */
-        .tech-section {
-            padding: 50px 20px;
-        }
+.accordion-content.open {
+    max-height: 500px;
+    padding: 20px;
+    border-top: 1px solid var(--border-glass);
+}
 
-        .accordion-item {
-            background: var(--bg-card);
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid var(--border-glass);
-            overflow: hidden;
-        }
+.size-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: center;
+}
+.size-table th, .size-table td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    color: #ccc;
+}
+.size-table th {
+    color: var(--gold-main);
+}
 
-        .accordion-header {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            background: rgba(255,255,255,0.02);
-        }
+/* --- 12. الفوتر (Footer) --- */
+footer {
+    text-align: center;
+    padding: 40px 20px 120px; /* مسافة إضافية عشان النافبار الموبايل */
+    background: #000;
+    border-top: 1px solid #111;
+}
 
-        .accordion-header h3 {
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.social-links {
+    margin: 20px 0;
+}
+.social-links a {
+    color: var(--text-white);
+    margin: 0 10px;
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+.social-links a:hover { color: var(--gold-main); }
 
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding: 0 20px;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
+/* --- 13. نافبار الموبايل السفلي --- */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 calc(12px + var(--safe-area-bottom));
+    z-index: 1000;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+}
 
-        .accordion-content.open {
-            max-height: 500px; /* أو قيمة أكبر حسب المحتوى */
-            padding: 20px;
-            border-top: 1px solid var(--border-glass);
-        }
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.75rem;
+    gap: 5px;
+    transition: 0.3s;
+}
 
-        .size-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            text-align: center;
-        }
-        .size-table th, .size-table td {
-            padding: 10px;
-            border-bottom: 1px solid #333;
-            color: #ccc;
-        }
-        .size-table th {
-            color: var(--gold-main);
-        }
+.nav-item i {
+    font-size: 1.4rem;
+}
 
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px 100px; /* padding-bottom extra for mobile nav */
-            background: #000;
-        }
-        
-        .social-links {
-            margin: 20px 0;
-        }
-        .social-links a {
-            color: var(--text-white);
-            margin: 0 10px;
-            font-size: 1.5rem;
-        }
-        .social-links a:hover { color: var(--gold-main); }
+.nav-item.active {
+    color: var(--gold-main);
+}
 
-        /* --- Responsive Tweaks --- */
-        @media (max-width: 768px) {
-            .desktop-header { display: none; }
-            .hero h1 { font-size: 2.5rem; }
-        }
-        
-        @media (min-width: 769px) {
-            .mobile-nav { display: none; }
-            body { padding-bottom: 0; }
-            .product-card { flex: 0 0 300px; }
-            .features-grid { grid-template-columns: repeat(4, 1fr); }
-            .hero-content { margin: 0 auto; }
-            .hero { padding-top: 80px; }
-        }
+.nav-item.active i {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+}
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* --- 14. التجاوب (Media Queries) --- */
+@media (max-width: 768px) {
+    .desktop-header { display: none; }
+    .hero h1 { font-size: 2.5rem; }
+}
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@media (min-width: 769px) {
+    .mobile-nav { display: none; }
+    body { padding-bottom: 0; }
+    .product-card { flex: 0 0 300px; }
+    .features-grid { grid-template-columns: repeat(4, 1fr); }
+    .hero-content { margin: 0 auto; }
+    .hero { padding-top: 80px; }
+}
+
+/* --- 15. الحركات (Animations) --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
