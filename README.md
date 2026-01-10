@@ -1,117 +1,107 @@
-# HarMed - Medical Luxury 🩺✨
+<div align="center">
+  <img src="images/logo/icon.png" alt="HarMed Logo" width="120" />
+  <br />
+  <h1>🩺 HarMed | Medical Luxury</h1>
+  <p><strong>الأناقة في ميدان العمل | Where Elegance Meets Function</strong></p>
 
-**HarMed** is a modern, mobile-first e-commerce website designed for premium medical wear. It features a sleek UI, dynamic product rendering, and a direct-to-WhatsApp ordering system, providing a seamless shopping experience for healthcare professionals.
+  <p>
+    <a href="https://seif4d.github.io/Harmed/">
+      <img src="https://img.shields.io/badge/Live_Demo-Visit_Site-D4AF37?style=for-the-badge&logo=github" alt="Live Demo" />
+    </a>
+  </p>
+</div>
 
-## 🌟 Key Features
+---
 
-*   **Mobile-First Design:** Optimized for smartphones with bottom navigation, swipeable galleries, and sticky action buttons.
-*   **Dynamic Product Engine:** Uses a single `product.html` file to render unlimited products via JavaScript based on URL parameters (e.g., `?id=classic`).
-*   **Direct WhatsApp Checkout:** Automatically formats orders (Product, Color, Size, Quantity, Total Price) and opens a WhatsApp chat with the store.
-*   **Medical Themed UI:** Features a custom ECG (Heartbeat) Preloader and medical aesthetics (Gold & Black theme).
-*   **Performance:** Lightweight, vanilla JavaScript (No heavy frameworks), and Lazy Loading techniques.
-*   **Scroll Spy Navigation:** Auto-active navigation links based on the user's scroll position.
+## 📖 عن المشروع (About)
+**HarMed** هو منصة تجارة إلكترونية متخصصة في الأزياء الطبية الفاخرة. يجمع المشروع بين فخامة التصميم وقوة الأداء التقني.
+يتميز الموقع بأنه **Web App** (تطبيق ويب) يعتمد على صفحة واحدة ديناميكية لعرض المنتجات، مما يوفر سرعة هائلة وسهولة في الصيانة، مع نظام طلب مباشر عبر واتساب يغني عن تعقيدات المتاجر التقليدية.
 
-## 📂 Project Structure
+## ✨ المميزات التقنية (Key Features)
 
-Ensure your files are organized exactly like this for the images and styles to load correctly:
+- **⚙️ محرك منتجات ديناميكي (Dynamic Product Engine):** لا توجد صفحات متعددة! صفحة واحدة (`product.html`) تقوم بجلب البيانات، الصور، والألوان تلقائياً بناءً على كود المنتج في الرابط (`?id=classic`).
+- **📱 تجربة Mobile-First:** تصميم يحاكي التطبيقات الأصلية (Native Apps) مع شريط تنقل سفلي، معرض صور بالسحب (Swipe Gallery)، وأزرار عائمة (Sticky Footer).
+- **🛍️ نظام Smart Checkout:** زر "شراء" ذكي يقوم بحساب الإجمالي وتنسيق تفاصيل الطلب (المنتج، اللون، المقاس، الكمية) وإرسالها كرسالة منظمة عبر **WhatsApp API**.
+- **🎨 واجهة بصرية غنية:**
+  - شاشة تحميل مبتكرة بنبض القلب (**ECG Preloader**).
+  - تفعيل تلقائي للأزرار عند التمرير (**Scroll Spy**).
+  - الوضع الداكن (Dark Mode) مع لمسات ذهبية.
+
+## 🛠️ التقنيات المستخدمة (Tech Stack)
+
+- **HTML5 & CSS3:** استخدام المتغيرات (Variables) وتخطيط Grid/Flexbox.
+- **Vanilla JavaScript (ES6+):** الاعتماد على الجافاسكريبت النقي لبناء قاعدة بيانات المنتجات (`productsDB`) والتحكم في المنطق (DOM Manipulation & URLSearchParams).
+- **Font Awesome:** للأيقونات.
+
+## 📂 هيكلية المشروع (Folder Structure)
+
+لضمان عمل الكود الديناميكي، تم تنظيم الملفات كالتالي:
 
 ```text
-HarMed-Project/
-│
-├── index.html           # Main Landing Page
-├── product.html         # Dynamic Product Details Page
-│
-├── assets/
-│   ├── css/
-│   │   ├── main.css     # Styles for Home Page
-│   │   └── product.css  # Styles for Product Page
-│   │
-│   └── js/
-│       ├── main.js      # Logic for Home Page (Scroll, Preloader)
-│       └── product.js   # Logic for Product Data & WhatsApp
-│
+Harmed/
+├── index.html           # الصفحة الرئيسية
+├── product.html         # القالب الديناميكي للمنتجات
+├── README.md            # التوثيق
+└── assets/
+    ├── css/             # main.css, product.css
+    └── js/              # main.js, product.js (Logic Core)
 └── images/
     ├── logo/
-    │   └── icon.png
     ├── ui/
-    │   └── bg.jpg       # Hero section background
-    └── products/        # Product Images (Case Sensitive!)
+    └── products/        # صور المنتجات (يجب أن تطابق الأسماء في الكود)
         ├── classic/
         ├── round/
         ├── zipper/
-        ├── halfneck/
-        ├── halfneck2/
-        ├── hijab/
-        ├── polo/
-        └── female/
+        └── ...
 ```
 
-## 🚀 How to Run
+## ⚙️ دليل التعديل والإدارة (Configuration)
 
-Since this is a static website, you don't need to install Node.js or databases.
+بما أن الموقع ديناميكي، يمكنك التحكم في المحتوى من ملف واحد فقط (`assets/js/product.js`) دون الحاجة لتعديل HTML.
 
-1.  **Clone or Download** this repository.
-2.  Open the project folder.
-3.  Double-click `index.html` to open it in your browser.
-
-## ⚙️ Configuration & Customization
-
-### 1. Changing the WhatsApp Number
-To receive orders on your phone, go to `assets/js/product.js` and update the variable at the top:
-
+### 1. تغيير رقم الواتساب لاستقبال الطلبات
+افتح ملف `assets/js/product.js` وعدل المتغير في الأعلى:
 ```javascript
-// assets/js/product.js
-const phoneNumber = "201000000000"; // Replace with your number (Country code + Number)
+const phoneNumber = "201000000000"; // ضع رقمك هنا مع كود الدولة
 ```
 
-### 2. Adding/Editing Products
-All product data is stored in the `productsDB` object inside `assets/js/product.js`. To add a new product:
-
-1.  Add a new key to the object (e.g., `"newmodel"`).
-2.  Fill in the details (name, price, images, colors).
-3.  **Important:** Create a folder in `images/products/newmodel/` and add the images there.
+### 2. إضافة منتج جديد
+بدلاً من إنشاء صفحة جديدة، فقط أضف بيانات المنتج في كائن `productsDB` داخل ملف `product.js`:
 
 ```javascript
-"newmodel": {
-    name: "New Scrub Style",
-    price: "700",
-    description: "Description here...",
-    colors: ["#000000"],
-    colorNames: ["Black"],
+"new_model": {
+    name: "اسم الموديل الجديد",
+    price: "750",
+    description: "وصف المنتج...",
+    colors: ["#000000", "#FFFFFF"],
+    colorNames: ["Black", "White"],
     images: [
-        "images/products/newmodel/cover.jpg",
-        "images/products/newmodel/1.jpg"
+        "images/products/new_model/cover.jpg",
+        "images/products/new_model/1.jpg"
     ]
 }
 ```
+ثم قم بإنشاء مجلد الصور بنفس الاسم، واربطه في الصفحة الرئيسية هكذا:
+`<a href="product.html?id=new_model">تفاصيل</a>`
 
-### 3. Linking the New Product
-In `index.html`, simply add a link with the ID you created:
-```html
-<a href="product.html?id=newmodel">View Details</a>
-```
+## 🚀 التشغيل (How to Run)
 
-## ⚠️ Important Note on Images
+1. قم بعمل Clone للمشروع:
+   ```bash
+   git clone https://github.com/seif4d/Harmed.git
+   ```
+2. افتح `index.html`.
 
-**Linux servers (and GitHub Pages) are Case Sensitive.**
-Ensure your folder names in the code match your actual folder names exactly.
-*   ❌ Code: `images/products/HalfNeck/...` | Folder: `halfneck`
-*   ✅ Code: `images/products/halfneck/...` | Folder: `halfneck`
+## 📸 لقطات شاشة (Screenshots)
+*(يمكنك إضافة صور للموقع هنا)*
 
-**Recommendation:** Keep all folder names and extensions in **lowercase** (`.jpg`, not `.JPG`).
+## 👤 التواصل
 
-## 🛠️ Technologies Used
-
-*   **HTML5** (Semantic Structure)
-*   **CSS3** (Flexbox, Grid, Glassmorphism, Animations)
-*   **JavaScript** (ES6+, DOM Manipulation, URLSearchParams)
-*   **FontAwesome** (Icons)
-*   **Google Fonts** (Cairo & Playfair Display)
-
-## 📞 Contact
-
-**HarMed Medical Wear**
-*   *Be Unique... Be Elegant.*
+تم التطوير بواسطة: **سيف**
+- GitHub: [@seif4d](https://github.com/seif4d)
 
 ---
-*Developed with ❤️ by Seif X DebiaN*
+<div align="center">
+  <p>&copy; 2025 HarMed Medical Wear. All Rights Reserved.</p>
+</div>
+```
